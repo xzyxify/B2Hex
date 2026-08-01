@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Binary ⇄ Hex Converter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="card">
+  <h1>Binary ⇄ Hex Converter</h1>
+  <p class="sub">Convert binary to hexadecimal, or hex back to binary. Spaces are ignored.</p>
+
+  <div class="field">
+    <label for="binaryInput">Binary</label>
+    <textarea id="binaryInput" placeholder="e.g. 01001000 01101001"></textarea>
+  </div>
+
+  <div class="row">
+    <button onclick="binToHex()">Binary → Hex ↓</button>
+    <button class="secondary" onclick="clearAll()">Clear</button>
+  </div>
+
+  <div class="field">
+    <label for="hexInput">Hex</label>
+    <textarea id="hexInput" placeholder="e.g. 48 69"></textarea>
+    <button class="copy-btn" onclick="copyField('hexInput')">Copy hex</button>
+  </div>
+
+  <div class="row">
+    <button onclick="hexToBin()">Hex → Binary ↑</button>
+  </div>
+
+  <div class="error" id="errorMsg"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
