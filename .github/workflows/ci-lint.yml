@@ -1,0 +1,33 @@
+# Repository: https://github.com/xzyxify/B2Hex.git
+name: CI - Lint & Validate
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate HTML
+        run: npx --yes html-validate index.html
+
+      - name: Lint CSS
+        run: npx --yes stylelint "style.css" --config-basedir . || npx --yes stylelint "style.css" --allow-empty-input
+
+      - name: Lint JavaScript
+        run: npx --yes eslint script.js --no-eslintrc --env browser,es2021 --parser-options=ecmaVersion:2021
+
+      - name: Check for basic JS syntax errors
+        run: node --check script.js
