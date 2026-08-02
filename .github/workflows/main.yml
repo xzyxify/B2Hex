@@ -1,0 +1,47 @@
+name: Docker CI with Trivy
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build b2hex image
+        run: |
+          docker build -t b2hex:latest ./b2hex
+
+      - name: Build b2deci image
+        run: |
+          docker build -t b2deci:latest ./b2deci
+
+      - name: Run Trivy scan on b2hex
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: b2hex:latest
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: "os,library"
+          severity: "CRITICAL,HIGH"
+
+      - name: Run Trivy scan on b2deci
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: b2deci:latest
+          format: table
+          exit-code: "1"
+          ignore-unfixed: true
+          vuln-type: "os,library"
+          severity: "CRITICAL,HIGH"
