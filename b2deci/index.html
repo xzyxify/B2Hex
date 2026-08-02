@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Binary ⇄ Decimal Converter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="card">
+  <h1>Binary ⇄ Decimal Converter</h1>
+  <p class="sub">Convert binary to decimal, or decimal back to binary. Spaces are ignored.</p>
+
+  <div class="field">
+    <label for="binaryInput">Binary</label>
+    <textarea id="binaryInput" placeholder="e.g. 01001000 01101001"></textarea>
+  </div>
+
+  <div class="row">
+    <button onclick="binToDec()">Binary → Decimal ↓</button>
+    <button class="secondary" onclick="clearAll()">Clear</button>
+  </div>
+
+  <div class="field">
+    <label for="decInput">Decimal</label>
+    <textarea id="decInput" placeholder="e.g. 72 105"></textarea>
+    <button class="copy-btn" onclick="copyField('decInput')">Copy decimal</button>
+  </div>
+
+  <div class="row">
+    <button onclick="decToBin()">Decimal → Binary ↑</button>
+  </div>
+
+  <div class="error" id="errorMsg"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

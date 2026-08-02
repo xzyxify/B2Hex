@@ -18,11 +18,11 @@ function binToHex() {
   const padded = '0'.repeat(padLength) + raw;
   let hex = '';
   for (let i = 0; i < padded.length; i += 4) {
-    const nibble = padded.substr(i, 4);
+    const nibble = padded.substring(i, i + 4);
     hex += parseInt(nibble, 2).toString(16);
   }
   // Group hex output in pairs for readability
-  const grouped = hex.toUpperCase().match(/.{1,2}/g).join(' ');
+  const grouped = hex.toUpperCase().match(/.{1,2}/g)?.join(' ') || hex.toUpperCase();
   document.getElementById('hexInput').value = grouped;
 }
 

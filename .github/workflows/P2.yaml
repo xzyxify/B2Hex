@@ -1,0 +1,15 @@
+name: Pipeline 2 - Echo Value From Pipeline 1
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  call-pipeline1:
+    uses: ./.github/workflows/pipeline1.yml
+
+  echo-value:
+    needs: call-pipeline1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo value from pipeline 1
+        run: echo "Value from pipeline 1 is ${{ needs.call-pipeline1.outputs.my_value }}"

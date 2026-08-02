@@ -1,0 +1,22 @@
+name: Pipeline 1 - Produce Value
+
+on:
+  workflow_call:
+    outputs:
+      my_value:
+        description: "The value produced by pipeline 1"
+        value: ${{ jobs.set-value.outputs.my_value }}
+  workflow_dispatch: {}
+
+jobs:
+  set-value:
+    runs-on: ubuntu-latest
+    outputs:
+      my_value: ${{ steps.generate.outputs.my_value }}
+    steps:
+      - name: Generate value
+        id: generate
+        run: |
+          VALUE=1
+          echo "my_value=$VALUE" >> "$GITHUB_OUTPUT"
+          echo "Generated value: $VALUE"
